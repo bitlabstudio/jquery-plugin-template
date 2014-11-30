@@ -1,0 +1,23 @@
+{
+    "name": "MYPLUGIN_PACKAGE_NAME",
+    "version": "0.1.0",
+    "author": {
+        "name": "MYPLUGIN_AUTHOR_NAME",
+        "email": "MYPLUGIN_AUTHOR_EMAIL "
+    }
+    "description": "MYPLUGIN_DESCRIPTION",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "MYPLUGIN_REPO_URL"
+    },
+    "devDependencies": {
+        "grunt": "*",
+        "grunt-contrib-less": "*",
+        "grunt-contrib-jshint": "*",
+        "grunt-contrib-connect": "*",
+        "grunt-contrib-qunit": "*",
+        "grunt-contrib-uglify": "*",
+        "grunt-contrib-watch": "*"
+    }
+}
