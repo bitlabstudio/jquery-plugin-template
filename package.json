@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "author": {
         "name": "MYPLUGIN_AUTHOR_NAME",
-        "email": "MYPLUGIN_AUTHOR_EMAIL "
-    }
+        "email": "MYPLUGIN_AUTHOR_EMAIL"
+    },
     "description": "MYPLUGIN_DESCRIPTION",
     "license": "MIT",
     "repository": {
@@ -17,6 +17,7 @@
         "grunt-contrib-jshint": "*",
         "grunt-contrib-connect": "*",
         "grunt-contrib-qunit": "*",
+        "grunt-blanket-qunit": "*",
         "grunt-contrib-uglify": "*",
         "grunt-contrib-watch": "*"
     }

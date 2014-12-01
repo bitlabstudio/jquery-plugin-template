@@ -6,7 +6,7 @@
 MYPLUGIN_AUTHOR_NAME='Your Name'
 
 # Your email address, used in package.json
-MYPLUGIN_AUTHOR_EMAIL='yourmail@gmail.com'
+export MYPLUGIN_AUTHOR_EMAIL='yourmail@gmail.com'
 
 # The project name as it would appear as the main headline in the README
 MYPLUGIN_FULL_NAME='My Awesome jQuery Plugin'
@@ -15,6 +15,9 @@ MYPLUGIN_FULL_NAME='My Awesome jQuery Plugin'
 # for on npm registry, if you decide to register it there. You should search npm first and make sure
 # that your package name is not taken already.
 MYPLUGIN_PACKAGE_NAME='jquery-awesome-plugin'
+
+# this one servers as filename for your js, css and test files
+MYPLUGIN_FILENAME="${MYPLUGIN_PACKAGE_NAME}"
 
 # A short description which will be added as the first line in the README and to the package.json file
 MYPLUGIN_DESCRIPTION='A jQuery plugin, that does pretty awesome things.'
@@ -39,15 +42,21 @@ rm -rf .git
 rm README.rst
 mv MYPLUGIN_README.rst README.rst
 rm AUTHORS
+CMD=(find . -type f \( -not -iname 'init.sh' -not -path '.git' \) -print0)
 "${CMD[@]}" | xargs -0 perl -pi -e "s#MYPLUGIN_YEAR#${MYPLUGIN_YEAR}#g"
 "${CMD[@]}" | xargs -0 perl -pi -e "s#MYPLUGIN_AUTHOR_NAME#${MYPLUGIN_AUTHOR_NAME}#g"
 "${CMD[@]}" | xargs -0 perl -pi -e 's#MYPLUGIN_AUTHOR_EMAIL#$ENV{MYPLUGIN_AUTHOR_EMAIL}#g'
 "${CMD[@]}" | xargs -0 perl -pi -e "s#MYPLUGIN_FULL_NAME#${MYPLUGIN_FULL_NAME}#g"
+"${CMD[@]}" | xargs -0 perl -pi -e "s#MYPLUGIN_FILENAME#${MYPLUGIN_FILENAME}#g"
 "${CMD[@]}" | xargs -0 perl -pi -e "s#MYPLUGIN_DESCRIPTION#${MYPLUGIN_DESCRIPTION}#g"
 "${CMD[@]}" | xargs -0 perl -pi -e "s#MYPLUGIN_PACKAGE_NAME#${MYPLUGIN_PACKAGE_NAME}#g"
 "${CMD[@]}" | xargs -0 perl -pi -e "s#MYPLUGIN_REPO_URL#${MYPLUGIN_REPO_URL}#g"
 "${CMD[@]}" | xargs -0 perl -pi -e "s#MYPLUGIN_PLUGIN_PROTOTYPE#${MYPLUGIN_PROTOTYPE_NAME}#g"
 "${CMD[@]}" | xargs -0 perl -pi -e "s#MYPLUGIN_NAMESPACE#${MYPLUGIN_NAMESPACE}#g"
+mv css/MYPLUGIN_FILENAME.less "css/${MYPLUGIN_FILENAME}.less"
+mv js/MYPLUGIN_FILENAME.js "js/${MYPLUGIN_FILENAME}.js"
+mv test/MYPLUGIN_FILENAME-tests.js "test/${MYPLUGIN_FILENAME}-tests.js"
+mv test/MYPLUGIN_FILENAME-tests.html "test/${MYPLUGIN_FILENAME}-tests.html"
 
 rm init.sh
 git init

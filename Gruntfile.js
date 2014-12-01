@@ -21,7 +21,7 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
-            files  : ['js/MYPLUGIN_FILENAME.js', 'test/MYPLUGIN_FILENAME-test.js'],
+            files  : ['js/MYPLUGIN_FILENAME.js', 'test/MYPLUGIN_FILENAME-tests.js'],
             options: {
                 globals: {
                     jQuery  : true,
@@ -30,11 +30,19 @@ module.exports = function (grunt) {
                 }
             }
         },
+        blanket_qunit: {
+            all: {
+                options: {
+                    urls     : ['http://localhost:8000/test/MYPLUGIN_FILENAME-tests.html?coverage=true&gruntReport'],
+                    threshold: 70
+                }
+            }
+        },
         qunit: {
             all: {
                 options: {
                     urls: [
-                        'http://localhost:8000/test/MYPLUGIN_FILENAME-test.html'
+                        'http://localhost:8000/test/MYPLUGIN_FILENAME-tests.html'
                     ]
                 }
             }
@@ -64,7 +72,7 @@ module.exports = function (grunt) {
                 tasks: ['jshint', 'uglify']
             },
             jshint: {
-                files: ['js/MYPLUGIN_FILENAME.js', 'test/MYPLUGIN_FILENAME-test.js'],
+                files: ['js/MYPLUGIN_FILENAME.js', 'test/MYPLUGIN_FILENAME-tests.js'],
                 tasks: ['jshint']
             },
             css: {
@@ -76,9 +84,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-qunit');
+    grunt.loadNpmTasks('grunt-blanket-qunit');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('test', ['connect', 'jshint', 'qunit']);
+    grunt.registerTask('blanket_test', ['connect', 'jshint', 'blanket_qunit']);
 };
